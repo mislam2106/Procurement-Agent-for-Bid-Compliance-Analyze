@@ -1,0 +1,37 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Outputs (generated files — do not commit)
+outputs/tender_metadata/*.json
+outputs/compliance_checklist/*.json
+outputs/oem_checklist/*.json
+outputs/envelope_contents/*.json
+
+# Documents (sensitive tender files — do not commit)
+documents/*.pdf
+documents/*.docx
+documents/*.doc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
