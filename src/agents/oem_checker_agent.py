@@ -5,6 +5,7 @@ import anthropic
 
 from config.settings import MODEL
 from config.prompts import OEM_CHECKER_PROMPT
+from src.tools.json_extractor import extract_json
 
 
 def check_oem_requirements(
@@ -39,25 +40,18 @@ No prose before or after the JSON.
 
     with client.messages.stream(
         model=MODEL,
-        max_tokens=6144,
+        max_tokens=32000,
         thinking={"type": "adaptive"},
         system=OEM_CHECKER_PROMPT,
         messages=[{"role": "user", "content": user_message}],
     ) as stream:
         response = stream.get_final_message()
 
-    result_text = ""
-    for block in response.content:
-        if block.type == "text":
-            result_text = block.text
-            break
+    result_text = next(
+        (block.text for block in response.content if block.type == "text"), ""
+    )
 
-    result_text = result_text.strip()
-    if result_text.startswith("```"):
-        lines = result_text.split("\n")
-        result_text = "\n".join(lines[1:-1]) if lines[-1].strip() == "```" else "\n".join(lines[1:])
-
-    oem_data = json.loads(result_text)
+    oem_data = extract_json(result_text)
     count = len(oem_data.get("oem_requirements", []))
     print(f"[OEMChecker] Done — {count} OEM requirements identified")
     return oem_data

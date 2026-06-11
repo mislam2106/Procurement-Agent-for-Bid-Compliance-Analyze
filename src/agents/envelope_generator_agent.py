@@ -5,6 +5,7 @@ import anthropic
 
 from config.settings import MODEL
 from config.prompts import ENVELOPE_GENERATOR_PROMPT
+from src.tools.json_extractor import extract_json
 
 
 def generate_envelope_contents(
@@ -56,25 +57,18 @@ No prose before or after the JSON.
 
     with client.messages.stream(
         model=MODEL,
-        max_tokens=8192,
+        max_tokens=32000,
         thinking={"type": "adaptive"},
         system=ENVELOPE_GENERATOR_PROMPT,
         messages=[{"role": "user", "content": user_message}],
     ) as stream:
         response = stream.get_final_message()
 
-    result_text = ""
-    for block in response.content:
-        if block.type == "text":
-            result_text = block.text
-            break
+    result_text = next(
+        (block.text for block in response.content if block.type == "text"), ""
+    )
 
-    result_text = result_text.strip()
-    if result_text.startswith("```"):
-        lines = result_text.split("\n")
-        result_text = "\n".join(lines[1:-1]) if lines[-1].strip() == "```" else "\n".join(lines[1:])
-
-    envelope_data = json.loads(result_text)
+    envelope_data = extract_json(result_text)
     e1 = len(envelope_data.get("envelope_1", []))
     e2 = len(envelope_data.get("envelope_2", []))
     print(f"[EnvelopeGenerator] Done — Envelope 1: {e1} docs, Envelope 2: {e2} docs")

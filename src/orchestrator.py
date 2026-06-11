@@ -39,12 +39,13 @@ class BidComplianceOrchestrator:
         self.client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
         self.state = BidAnalysisState()
 
-    def run(self, file_path: str, agents: Optional[list[str]] = None) -> BidAnalysisState:
+    def run(self, file_path: "str | list[str]", agents: Optional[list[str]] = None) -> BidAnalysisState:
         """
-        Run the full analysis pipeline on a document.
+        Run the full analysis pipeline on one or more documents.
 
         Args:
-            file_path: Path to the PDF or DOCX file
+            file_path: Path (or list of paths) to PDF/DOCX files.
+                       Multiple files (e.g. Vol 1 + Vol 2) are merged before analysis.
             agents: Optional list of agent names to run. If None, runs all agents.
                     Valid values: ['metadata', 'compliance', 'oem', 'envelope']
 
@@ -54,14 +55,34 @@ class BidComplianceOrchestrator:
         run_all = agents is None
         agents_to_run = set(agents or [])
 
-        self.state.source_filename = Path(file_path).name
+        # Normalise to a list
+        file_paths = [file_path] if isinstance(file_path, str) else file_path
 
-        # Step 1: Document Ingestion (always runs)
+        # Use first filename as the label; append volume count if multi-volume
+        self.state.source_filename = Path(file_paths[0]).stem
+        if len(file_paths) > 1:
+            self.state.source_filename += f"_and_{len(file_paths)-1}_more"
+
+        # Step 1: Document Ingestion — read and merge all volumes
         print("\n" + "="*60)
-        print("STEP 1: Document Ingestion")
+        print(f"STEP 1: Document Ingestion ({len(file_paths)} file(s))")
         print("="*60)
-        self.state.ingestion_result = ingest_document(file_path)
-        doc_text = self.state.ingestion_result.raw_text
+
+        merged_parts = []
+        last_result = None
+        for i, fp in enumerate(file_paths, start=1):
+            print(f"  Reading volume {i}: {Path(fp).name}")
+            result = ingest_document(fp)
+            merged_parts.append(
+                f"\n{'='*60}\n=== VOLUME {i}: {Path(fp).name} ===\n{'='*60}\n"
+                + result.raw_text
+            )
+            last_result = result
+
+        self.state.ingestion_result = last_result  # keep last for metadata
+        doc_text = "\n\n".join(merged_parts)
+        total_words = len(doc_text.split())
+        print(f"  Merged total: {total_words:,} words across {len(file_paths)} volume(s)")
 
         # Step 2: Metadata Extraction
         if run_all or "metadata" in agents_to_run:
@@ -107,6 +128,6 @@ class BidComplianceOrchestrator:
         print("="*60)
         saved_paths = save_all_outputs(self.state)
         for output_type, path in saved_paths.items():
-            print(f"  [{output_type}] → {path}")
+            print(f"  [{output_type}] -> {path}")
 
         return self.state
