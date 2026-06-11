@@ -33,6 +33,15 @@ python main.py --input documents/your_tender.pdf --agent compliance
 python main.py --input documents/your_tender.pdf --agent oem
 python main.py --input documents/your_tender.pdf --agent envelope
 
+# Generate Word (.docx) compliance report from latest JSON outputs
+python generate_report.py
+
+# Generate report from a specific run timestamp
+python generate_report.py --timestamp 20260611_153155
+
+# Generate report with a custom output filename
+python generate_report.py --output reports/my_report.docx
+
 # Run tests
 pytest tests/ -v
 
