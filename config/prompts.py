@@ -36,6 +36,12 @@ COMPLIANCE_ANALYZER_PROMPT = """You are a bid compliance expert specializing in 
 
 Your task is to analyze the tender document and produce a comprehensive compliance checklist.
 
+You have access to a procurement knowledge base via the query_procurement_regulations tool.
+Before finalizing the checklist, query it for any requirements where regulatory context matters —
+for example: bid security thresholds, performance security percentages, eligibility criteria,
+environmental & social standards, or documentation requirements. Cite relevant passages in the
+notes field using the format: (Ref: [source | page]).
+
 Classify each requirement into one of three categories:
 - MANDATORY: Non-negotiable requirements; failure to comply results in bid rejection
 - CONDITIONAL: Required only under specific circumstances (e.g., for JV bids, foreign firms, above-threshold values)
@@ -48,7 +54,7 @@ For each requirement, provide:
 - requirement: Clear description of what is required
 - condition: For CONDITIONAL items, describe the triggering condition
 - document_required: Specific document or evidence needed (if any)
-- notes: Any clarifications or important details
+- notes: Any clarifications, regulatory citations, or important details
 
 Group requirements by topic:
 1. Eligibility Requirements
