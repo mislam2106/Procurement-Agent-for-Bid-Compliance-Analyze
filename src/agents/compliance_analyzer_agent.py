@@ -27,7 +27,9 @@ def analyze_compliance(
     user_message = f"""Please analyze the following tender document and produce a comprehensive compliance checklist.
 
 Use the query_procurement_regulations tool to cross-reference key requirements against the \
-procurement knowledge base (World Bank Guidelines, PPR 2025, etc.) before finalizing the checklist. \
+procurement knowledge base (Bangladesh PPR 2025 and e-GP guidelines/manuals) before finalizing the \
+checklist. That knowledge base does not cover World Bank or ADB frameworks, so do not rely on it for \
+donor-funded tenders. \
 Include relevant regulatory citations in the notes field of each requirement.
 
 TENDER METADATA (already extracted):

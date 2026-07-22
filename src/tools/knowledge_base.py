@@ -2,6 +2,9 @@
 Procurement Knowledge Base client.
 
 Queries the shared ChromaDB vectorstore built by the Procurement RAG app.
+Scope is Bangladesh e-GP: PPR 2025, the e-GP Guidelines 2025 gazette, and BPPA
+e-GP portal documentation. Donor-funded frameworks (World Bank, ADB) are not
+indexed — re-ingest those sources before relying on this for such tenders.
 Set RAG_VECTORSTORE_PATH in your .env to point at the vectorstore/ folder,
 e.g.: RAG_VECTORSTORE_PATH=C:/Users/misla/Documents/Claude Cowork/Procurement RAG/vectorstore
 """
@@ -24,10 +27,15 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 QUERY_REGULATIONS_TOOL = {
     "name": "query_procurement_regulations",
     "description": (
-        "Search the procurement knowledge base for relevant regulations, guidelines, "
-        "and best practices. Use this to cross-reference tender requirements against "
-        "World Bank Procurement Guidelines, PPR 2025, PPSD standards, or any other "
-        "loaded procurement document. Returns verbatim passages with source citations."
+        "Search the Bangladesh e-GP procurement knowledge base for relevant rules, "
+        "guidelines, and system procedures. Scope is Bangladesh public procurement "
+        "only: the Public Procurement Rules (PPR) 2025, the e-GP Guidelines 2025 "
+        "gazette, and BPPA e-GP portal documentation (Procuring Entity user and admin "
+        "manuals, FAQ, module release notes, portal overview). Use this to "
+        "cross-reference tender requirements against Bangladesh procurement law and "
+        "e-GP system workflow. This knowledge base does NOT cover World Bank, ADB, or "
+        "other donor-funded procurement frameworks — do not use it to answer questions "
+        "about those regimes. Returns verbatim passages with source citations."
     ),
     "input_schema": {
         "type": "object",
@@ -35,9 +43,9 @@ QUERY_REGULATIONS_TOOL = {
             "query": {
                 "type": "string",
                 "description": (
-                    "A specific procurement regulatory question, e.g. "
-                    "'performance security requirements for works contracts' or "
-                    "'eligibility criteria for international competitive bidding'"
+                    "A specific Bangladesh procurement or e-GP question, e.g. "
+                    "'tender security amount and release process' or "
+                    "'two envelope tender opening and evaluation committee procedure'"
                 ),
             },
             "k": {
