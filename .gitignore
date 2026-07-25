@@ -21,11 +21,15 @@ outputs/compliance_checklist/*.json
 outputs/oem_checklist/*.json
 outputs/envelope_contents/*.json
 outputs/tender_drafts/*.docx
+outputs/*.docx
 
 # Documents (sensitive tender files — do not commit)
 documents/*.pdf
 documents/*.docx
 documents/*.doc
+
+# Claude Code (personal/local settings)
+.claude/settings.local.json
 
 # IDE
 .vscode/
