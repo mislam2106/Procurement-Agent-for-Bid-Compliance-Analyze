@@ -89,5 +89,11 @@ def analyze(
     console.print(f"\n[green]Outputs saved to:[/green] outputs/\n")
 
 
+@app.command()
+def hello():
+    """Print a hello world greeting."""
+    console.print("[bold cyan]Hello, World![/bold cyan]")
+
+
 if __name__ == "__main__":
     app()
