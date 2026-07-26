@@ -79,7 +79,7 @@ r.font.size = Pt(13)
 
 goods = doc.add_paragraph()
 goods.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = goods.add_run("Procurement of Hemodialysis Machines with UPS (1,030 units)\nfor Kidney (Renal) Patient Care")
+r = goods.add_run("Procurement of Hemodialysis Machines (HD / Online-HDF Capable) with UPS (1,030 units)\nfor Kidney (Renal) Patient Care")
 r.font.size = Pt(12)
 
 doc.add_paragraph()
@@ -94,16 +94,16 @@ note(
     "requiring PE decision or NIKDU-specific input not yet supplied."
 )
 note(
-    "FORM-SERIES CAVEAT: This is an International Competitive Tendering (ICT) package, so "
-    "the applicable Standard Tender Document is e-PG4 [OTM(ICT)], per [egp_new_features.md | "
-    "page 163]. The Bangladesh e-GP knowledge base used to ground this draft only contains "
-    "retrievable form text labeled as the PG3-series (e.g., \"PG3-10\", \"Form PG3-2\") from "
-    "PPR2025.pdf pages 242-249 — no e-PG4-specific form text was retrievable. Declaration "
-    "content below (tender validity, tender security, eligibility, discount) was drafted from "
-    "that PG3-series text as the closest available template language, since the underlying "
-    "PPR 2025 legal obligations are the same regardless of STD. The ACTUAL e-PG4 form set and "
-    "form numbering must be pulled directly from the e-GP portal when NIKDU creates this "
-    "package — do not submit or reference PG3-numbered forms for this international tender."
+    "FORM-SERIES NOTE (RESOLVED): This is an International Competitive Tendering (ICT) package, "
+    "so the applicable Standard Tender Document is e-PG4 [OTM(ICT)], per [egp_new_features.md | "
+    "page 163]. Earlier drafts of this document were built from PG3-series text (the only Goods "
+    "form content retrievable from the Bangladesh e-GP knowledge base) as a proxy, since no "
+    "e-PG4-specific form text was retrievable there. That gap is now resolved: the actual e-PG4, "
+    "ICT.pdf Standard Tender Document was located and used directly to correct Sections 2, 5 and "
+    "7 — real ITT clause numbers, real e-PG4 form numbers (e-PG4-1 through e-PG4-12), and the "
+    "actual Section 2 (TDS) and Section 5 (Tender and Contract Forms) content now ground this "
+    "draft. Remaining PG3-sourced citations elsewhere (e.g., some GCC/PCC clause language) are "
+    "flagged individually where they remain unverified against e-PG4 specifically."
 )
 doc.add_page_break()
 
@@ -131,12 +131,16 @@ cover_rows = [
     ("Section 2 — TDS (Performance Security 10%)", "AI-SUGGESTED, not KB-verified", "Confirm actual percentage against Schedule II of PPR 2025 (KB does not contain this table)"),
     ("Section 3 — Schedule of Requirements (phasing)", "AI-suggested even split of 180 days", "Replace with NIKDU's actual phasing plan"),
     ("Appendix A — Hospital Delivery List", "AI-SUGGESTED, unverified", "Verify every site's actual readiness (space, power, RO water, dialysis capacity) and confirm/replace the list; assign real per-hospital unit counts"),
-    ("Section 4 — Technical Specification", "AI-SUGGESTED placeholder, generic", "MUST be replaced with the Technical Specification Committee's approved version before any further use — patient-safety relevant"),
+    ("Section 4 — Technical Specification", "Confirmed — Technical Specification Committee approved (v1.0, 24 Jul 2026)", "No action — this section now reflects the approved spec"),
+    ("Envelope structure vs. Technical Spec's evaluation guidance", "CONFLICT FLAGGED, not resolved", "Approved Tech Spec (Part C.3) recommends two-envelope evaluation; this draft is kept one-stage one-envelope per NIKDU instruction. Procurement authority should reconcile before publication."),
     ("Section 5 — Qualification Criteria (declarations)", "Grounded in PPR 2025 / e-GP Guidelines", "No action — standard legal declarations"),
     ("Section 5 — Qualification Criteria (numeric thresholds)", "Benchmarked against a real comparable tender (NICVD FY2024-25), not PPR-2025-verified", "TEC to set actual BDT/count thresholds using this structure — wrong figures risk unlawfully restricting or under-qualifying competition"),
     ("Section 6 — PCC (Inspection, Warranty, Payment, LD)", "AI-SUGGESTED defaults", "Confirm against NIKDU's standard contract terms and PPR 2025 requirements before publication"),
     ("Section 2 — Source of Fund / Eligible Countries / Domestic Preference", "Confirmed (NIKDU-supplied)", "No action — values as provided"),
-    ("Section 5 & 7 — Declaration/Form content", "Drafted from PG3-series KB text (National Competitive Tendering), NOT e-PG4 (International)", "This is an ICT package — pull the actual e-PG4 form set and form numbers from the e-GP portal; do not use PG3-numbered forms. See Form-Series Caveat below."),
+    ("Section 2, 5 & 7 — Form-series / clause grounding", "RESOLVED — now sourced from the actual e-PG4, ICT.pdf STD (real ITT clauses, real e-PG4-1 to e-PG4-12 form numbers)", "No action — replaces the earlier PG3-series proxy content"),
+    ("Section 2 — Tender Security wording", "CORRECTED — was stated as \"% of OCE\", which the actual STD prohibits (ITT 30.2)", "Now presented as a fixed BDT amount only; no action needed, already fixed"),
+    ("Section 2 — Performance Security 10%", "CONFIRMED — matches the e-PG4 STD's own default text (ITT 63.1)", "No longer an AI guess — no action needed"),
+    ("Section 5 — Financial capacity threshold", "CORRECTED — now 80-100% of OCE per the actual STD (ITT 14.1(b)), replacing an earlier NICVD-derived estimate", "No action — already corrected"),
 ]
 for a, b_, c_ in cover_rows:
     row = t0.add_row().cells
@@ -177,7 +181,7 @@ ift_rows = [
     ("Procurement Method", "Open Tendering Method (OTM) \u2014 International Competitive Tendering (ICT)"),
     ("Tendering Procedure", "One-Stage One-Envelope"),
     ("Standard Tender Document (STD)", "e-PG4 [OTM(ICT)]"),
-    ("Goods to be Procured", "Hemodialysis Machine with UPS"),
+    ("Goods to be Procured", "Hemodialysis Machine (HD / Online-HDF Capable) with dedicated UPS"),
     ("Quantity", "1,030 units (phased: 300 / 400 / 330 \u2014 see Section 3)"),
     ("Purpose", "To serve kidney (renal) disease patients under NIKDU's care network"),
     ("Official Cost Estimate (OCE)", "BDT 26,750.00 lakh (BDT 2,675,000,000 / approx. BDT 267.5 crore)"),
@@ -216,18 +220,25 @@ for c in hdr:
 
 tds_rows = [
     ("Name of Procuring Entity", "NIKDU", ""),
-    ("Brief Description of Goods", "Hemodialysis Machine with UPS, 1,030 units", ""),
-    ("Tender Validity Period", "150 days from the date of Tender opening", "Tender remains valid/binding for the period stated here [PPR2025.pdf | page 243]; set by NIKDU"),
-    ("Tender Security \u2014 Amount", "BDT 53,500,000 (BDT 535.00 lakh / approx. BDT 5.35 crore) \u2014 2% of the Official Cost Estimate (BDT 26,750.00 lakh)", "PPR 2025 does not fix a universal percentage in the retrieved text; 2% set by NIKDU. BASE MISMATCH FLAG: the NICVD FY2024-25 comparable tender sets Tender Security at 3% of the Tenderer's own quoted price (ITT 31.1), not a percentage of the OCE. NIKDU's 2%-of-OCE is a different base (fixed amount, known in advance) than NICVD's 3%-of-quoted-value (variable, set per Tenderer's bid). Both are valid mechanics under PPR generally; TEC should confirm which base NIKDU intends before publication, since the two are not directly comparable percentages."),
-    ("Tender Security \u2014 Form", "Pay Order / Bank Draft / Bank Guarantee (Tenderer's choice, per system options)", "[PPR2025.pdf | page 243]"),
-    ("Tender Security \u2014 Validity", "28 days beyond the Tender Validity Date (i.e., through day 178)", "[PPR2025.pdf | page 243, 247]"),
-    ("Performance Security \u2014 Amount / Form", "AI-suggested draft: 10% of the Contract Price, as an irrevocable, unconditional Bank Guarantee", "PPR 2025 ties the actual amount to the threshold in Schedule II [eGP_Guidelines.pdf | page 39], which is not in the retrieved KB text \u2014 NIKDU/TEC must verify the exact figure against Schedule II before finalizing; 10% shown here is common practice, not a KB-sourced figure"),
-    ("Performance Security \u2014 Validity", "28 days beyond the date of completion of performance obligations", "[PPR2025.pdf | page 243]"),
+    ("Brief Description of Goods", "Hemodialysis Machine (HD / Online-HDF Capable) with dedicated UPS, 1,030 units", ""),
+    ("Tender Validity Period (ITT 28.1)", "150 days from the date of Tender opening", "STD guidance: \u201cnormally 60 to 150 days\u201d [e-PG4, ICT.pdf, ITT 28.1] \u2014 150 days sits at the top of the normal range; a longer period needs HOPE/Authorized Officer approval per the STD note"),
+    ("Tender Security \u2014 Amount (ITT 30.1, 30.2)", "BDT 53,500,000 (BDT 535.00 lakh / approx. BDT 5.35 crore), stated as a fixed amount", "CORRECTED: the actual e-PG4 STD requires the Tender Security to be \u201cexpressed as a rounded fixed amount\u201d and explicitly says it \u201cshall NOT be stated as a precise percentage of the estimated total Contract value\u201d [e-PG4, ICT.pdf, ITT 30.2]. The BDT 53,500,000 figure (originally derived as 2% of the BDT 267.5 crore OCE, within the STD's suggested \u22643% cap) is kept, but must appear in the tender ONLY as this fixed sum \u2014 not as \u201c2% of OCE\u201d."),
+    ("Tender Security \u2014 Form (ITT 31.1)", "At the Tenderer's option: Bank Draft, Pay Order, or irrevocable unconditional Bank Guarantee (Form e-PG4-7)", "[e-PG4, ICT.pdf, ITT 31.1]"),
+    ("Tender Security \u2014 Validity (ITT 31.1(c))", "At least 28 days beyond the expiry of the Tender Validity Date", "[e-PG4, ICT.pdf, ITT 31.1(c)]"),
+    ("Performance Security \u2014 Amount / Form (ITT 63.1)", "10% of the Contract Price, as an irrevocable, unconditional Bank Guarantee", "CONFIRMED: this is the e-PG4 STD's own stated default \u2014 \u201cThe amount of Performance Security shall be ten (10) percent of the Contract Price\u201d [e-PG4, ICT.pdf, ITT 63.1] \u2014 no longer an AI guess"),
+    ("Performance Security \u2014 Submission Timeline (ITT 64, Rule 123(5) PPR 2025)", "14 working days from issuance of the Notification of Award (NOA)", "STD tiers by OCE: 7 working days if OCE \u2264 BDT 50 million; 10 if BDT 50\u2013250 million; 14 if OCE > BDT 250 million. NIKDU's OCE (BDT 2,675 million) is in the top tier. [e-PG4, ICT.pdf, ITT 63.1 note]"),
+    ("Contract Signing Timeline (ITT 68.2, Rule 123(9) PPR 2025)", "28 days from issuance of the NOA", "STD tiers by OCE: 14 days if OCE \u2264 BDT 50 million; 21 if BDT 50\u2013250 million; 28 if OCE > BDT 250 million. NIKDU's OCE is in the top tier. [e-PG4, ICT.pdf, ITT 68.2 note]"),
+    ("Retention Money / Contractual Security (ITT 67.1, 67.3)", "10% retention rate; combined Contractual Security (Performance Security + Retention Money) capped at 10% of Contract Price", "[e-PG4, ICT.pdf, ITT 67.1, 67.3]"),
     ("Delivery Period", "180 days from contract signing date, phased delivery", "See Section 3 for phase breakdown"),
+    ("Maximum Quantity Variation at Award (ITT 60.1)", "Up to 20% increase or decrease per item at Contract Award (NIKDU/TEC to state exact percentage, capped at 20% by the STD)", "[e-PG4, ICT.pdf, ITT 60.1]"),
+    ("Maximum Subcontracting (ITT 15.1)", "Up to 30% of the whole Goods, by value (NIKDU/TEC to state exact percentage, capped at 30% by the STD)", "[e-PG4, ICT.pdf, ITT 15.1]"),
+    ("Manufacturer's Authorization (ITT 27.1(g))", "Required for all items in the Schedule of Requirements", "STD default guidance: usually NOT required for off-the-shelf readily available Goods \u2014 hemodialysis machines are specialized medical devices, so \u201crequired\u201d is the appropriate choice here, but this is a real TDS decision point, not automatic [e-PG4, ICT.pdf, ITT 27.1(g)]"),
+    ("After-Sales Service (ITT 27.1(h))", "Required", "[e-PG4, ICT.pdf, ITT 27.1(h)]"),
     ("Domestic Preference Applicable", "Yes \u2014 15% Domestic Preference applied automatically (cannot be changed)", "[egp_new_features.md | page 163]"),
-    ("Joint Venture (JV) Participation", "Not allowed", "JV is not permitted under the e-PG4 [OTM(ICT)] STD [egp_new_features.md | page 163]"),
+    ("Domestic Preference as Evaluation Factor (ITT 48.1)", "Shall be a tender evaluation factor", "Consistent with Domestic Preference = Yes above [e-PG4, ICT.pdf, ITT 48.1]"),
+    ("Joint Venture (JV) Participation", "Not allowed", "Confirmed \u2014 the actual e-PG4 STD text contains no Joint Venture provisions at all [e-PG4, ICT.pdf]; consistent with [egp_new_features.md | page 163]"),
     ("Significantly Low-Priced Tender (SLT) Threshold", "Quoted prices more than 10% below the Official Cost Estimate are treated as financially non-responsive", "[egp_new_features.md | page 12]"),
-    ("Eligible Countries", "All countries are eligible, except Israel", "Per NIKDU instruction"),
+    ("Eligible Countries (ITT 5.1, 6.1)", "All countries are eligible, except Israel", "Per NIKDU instruction; clause location confirmed at ITT 5.1 (Tenderers) and ITT 6.1 (Goods/Related Services) [e-PG4, ICT.pdf]"),
 ]
 for a, b_, c_ in tds_rows:
     row = t2.add_row().cells
@@ -326,51 +337,230 @@ note(
 
 # ================= SECTION 4: TECHNICAL SPECIFICATIONS =================
 doc.add_page_break()
-h1("Section 4 \u2014 Technical Specification (AI-Suggested Draft \u2014 Pending Clinical Sign-Off)")
-body("Item: Hemodialysis Machine with Uninterruptible Power Supply (UPS)")
+h1("Section 4 \u2014 Technical Specification (Approved by Technical Specification Committee)")
+body("Item: Hemodialysis Machine (HD / Online-HDF Capable) with Dedicated Uninterruptible Power Supply (UPS)")
 note(
-    "AI-SUGGESTED DRAFT \u2014 NOT SOURCED FROM THE e-GP KNOWLEDGE BASE. These are generic, "
-    "commonly specified parameters for hospital-grade hemodialysis machines, not tied to any "
-    "specific brand/model and not a substitute for clinical review. NIKDU's biomedical "
-    "engineering and nephrology teams must validate, adjust, and formally approve every "
-    "parameter (dialyzer compatibility, alarm thresholds, exact flow/UF ranges, certifications) "
-    "before this is used in a real tender \u2014 incorrect specs here carry direct patient-safety "
-    "and legal risk."
+    "SOURCE: NIKDU_Hemodialysis_HDF_Machine_with_UPS_Technical_Spec_v1.docx, prepared for "
+    "NIKDU's Procurement Unit, dated 24 July 2026, Version Draft 1.0. This replaces the earlier "
+    "AI-suggested placeholder with the Technical Specification Committee's approved requirements. "
+    "Legend: [M] = Mandatory (non-compliance = disqualification). [D] = Desirable (scored, not "
+    "pass/fail). Bidders must respond to every line with Comply/Not Comply, a stated value, and "
+    "a cross-reference to catalogue/technical literature; unsupported 'comply' statements may be "
+    "treated as non-responsive."
+)
+note(
+    "DISCREPANCY FLAG: the source document's own evaluation guidance (Part C.3) recommends a "
+    "two-envelope approach (technical pass/fail first, then price). This tender is being kept as "
+    "ONE-STAGE ONE-ENVELOPE per NIKDU's explicit instruction for this draft. The Technical "
+    "Specification Committee's evaluation-method suggestion is therefore NOT applied here and "
+    "should be reconciled by NIKDU's procurement authority \u2014 the [M]/[D] pass/fail logic below "
+    "still applies within the single envelope, but envelope structure is unchanged."
 )
 
-t4 = doc.add_table(rows=1, cols=2)
-t4.style = "Light Grid Accent 1"
-hdr = t4.rows[0].cells
-hdr[0].text = "Parameter"
-hdr[1].text = "Requirement"
-for c in hdr:
-    for p in c.paragraphs:
+body("B.2 General & Compliance Requirements", bold=True)
+t4a = doc.add_table(rows=1, cols=3)
+t4a.style = "Light Grid Accent 1"
+hdr = t4a.rows[0].cells
+for i, txt in enumerate(["#", "Requirement", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
         for r in p.runs:
             r.bold = True
-
-spec_rows = [
-    ("Machine Type", "Microprocessor-controlled, volumetric ultrafiltration-control hemodialysis machine, single-patient, mobile (castor-mounted)"),
-    ("Dialysis Modes Supported", "Standard bicarbonate hemodialysis (HD); sequential ultrafiltration (UF); isolated UF; hemodiafiltration (HDF) capability desirable but not mandatory unless NIKDU requires it"),
-    ("Blood Pump Flow Rate", "Adjustable, approx. 0\u2013600 mL/min"),
-    ("Dialysate Flow Rate", "Adjustable, approx. 300\u2013800 mL/min, with low-flow/flow-reduction option"),
-    ("Ultrafiltration (UF) Control", "UF rate adjustable approx. 0\u20134,000 mL/hr; volumetric UF control with accuracy within \u00b12\u20133%"),
-    ("Safety Monitoring", "Conductivity monitor, air/foam detector, blood-leak detector, arterial/venous pressure monitors, temperature control, with audible/visual alarms and auto blood-pump stop on fault"),
-    ("Control Panel / Data", "Touch-screen interface with treatment data logging and (if available) connectivity for patient data export"),
-    ("UPS Backup", "Integrated or bundled UPS providing minimum 30 minutes backup at full operating load, with automatic seamless switchover (no interruption to an in-progress treatment)"),
-    ("Power Supply", "220\u2013240V AC, 50Hz, with surge/voltage-fluctuation protection suited to local grid conditions"),
-    ("Water Treatment Compatibility", "Compatible with standard RO-treated water supply; feed water conductivity requirement to be confirmed with the offered water treatment system"),
-    ("Consumables Compatibility", "Compatible with standard Luer-lock bloodlines and commercially available dialyzers (not single-source/proprietary-locked)"),
-    ("Regulatory Approval", "CE marking or US FDA clearance (or equivalent recognized authority) for the offered model, plus DGDA (Directorate General of Drug Administration) import/medical-device clearance for use in Bangladesh"),
-    ("Warranty", "Minimum 2 years comprehensive warranty from installation/commissioning date (NIKDU to confirm final period)"),
-    ("Installation, Training & Commissioning", "Included, per delivery site, prior to acceptance \u2014 including biomedical staff and nursing staff training"),
-    ("After-Sales Service / Spare Parts Availability", "Locally based or authorized service center with defined response time (e.g., within 48 hours of fault report); guaranteed spare-parts availability for a minimum period post-warranty (NIKDU to confirm, e.g., 5\u201310 years)"),
-    ("Country of Origin / Manufacturer", "No restriction, provided the country of manufacture is an eligible country per the TDS (all countries except Israel)"),
+b2_rows = [
+    ("B2.1", "The machine shall be a current-production model (not discontinued/refurbished), suitable for continuous clinical use in a hospital dialysis unit.", "[M]"),
+    ("B2.2", "The offered machine and manufacturer shall hold a valid quality certification: US-FDA clearance/approval OR EU-CE (with the relevant conformity route) OR TUV OR JIS. Valid certificates shall be submitted with the bid.", "[M]"),
+    ("B2.3", "The manufacturer shall be certified to ISO 13485 (medical device quality management). Certificate to be submitted.", "[M]"),
+    ("B2.4", "The machine shall comply with IEC 60601-1 (general) and IEC 60601-2-16 (particular requirements for haemodialysis/HDF/HF equipment), latest published editions. Test reports/declarations to be submitted.", "[M]"),
+    ("B2.5", "The machine shall comply with IEC 60601-1-2 (electromagnetic compatibility), latest edition.", "[M]"),
+    ("B2.6", "Free-sale certificate / evidence of use in the country of origin or other regulated markets.", "[M]"),
+    ("B2.7", "Country of origin, manufacturer name, and manufacturing plant shall be declared.", "[M]"),
 ]
-for a, b_ in spec_rows:
-    row = t4.add_row().cells
-    row[0].text = a
-    row[1].text = b_
-set_col_widths(t4, [6.0, 10.0])
+for row_data in b2_rows:
+    row = t4a.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4a, [1.5, 12.0, 1.5])
+
+body("B.3 Mandatory Technical Requirements \u2014 Performance Parameters", bold=True)
+note("Values below are indicative minimums in common market ranges, confirmed by NIKDU's Technical Specification Committee. Where a value is clinical policy, NIKDU adjusts the number, not the structure.")
+t4b = doc.add_table(rows=1, cols=4)
+t4b.style = "Light Grid Accent 1"
+hdr = t4b.rows[0].cells
+for i, txt in enumerate(["#", "Parameter", "Minimum requirement (measurable)", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
+        for r in p.runs:
+            r.bold = True
+b3_rows = [
+    ("B3.1", "Treatment modes", "Conventional HD; isolated/sequential ultrafiltration (UF); single-needle capability; online HDF capable (post- and/or pre-dilution).", "[M]"),
+    ("B3.2", "Blood flow rate", "Adjustable across at least approx. 20-500 mL/min (indicative); accuracy per manufacturer, verifiable.", "[M]"),
+    ("B3.3", "Dialysate flow rate", "Adjustable, at least approx. 300-800 mL/min (indicative), including an auto-flow option where offered.", "[M]"),
+    ("B3.4", "Ultrafiltration control", "Volumetric/balancing-chamber closed-loop UF control, independent of TMP.", "[M]"),
+    ("B3.5", "UF rate & accuracy", "UF rate adjustable up to at least approx. 2,000-4,000 mL/h (indicative); high UF-volume accuracy stated and verifiable.", "[M]"),
+    ("B3.6", "Dialysate temperature", "Adjustable within at least approx. 35-39\u00b0C (indicative), with over-temperature protection.", "[M]"),
+    ("B3.7", "Conductivity", "Continuous monitoring with adjustable set-point and guard-band alarms; automatic bypass on out-of-range.", "[M]"),
+    ("B3.8", "Bicarbonate dialysis", "Bicarbonate (two-part) dialysis using liquid concentrate and/or dry bicarbonate cartridge.", "[M]"),
+    ("B3.9", "Delivered-dose monitoring", "On-line clearance / Kt/V monitoring (or equivalent) displayed during treatment.", "[D]"),
+    ("B3.10", "Blood-volume monitoring", "Non-invasive relative-blood-volume monitoring to guide fluid removal and reduce intradialytic hypotension.", "[D]"),
+    ("B3.11", "Profiling", "Programmable UF and sodium/conductivity profiles.", "[D]"),
+]
+for row_data in b3_rows:
+    row = t4b.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4b, [1.3, 3.0, 8.7, 1.0])
+
+body("B.4 Mandatory Safety & Monitoring Requirements", bold=True)
+t4c = doc.add_table(rows=1, cols=3)
+t4c.style = "Light Grid Accent 1"
+hdr = t4c.rows[0].cells
+for i, txt in enumerate(["#", "Requirement", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
+        for r in p.runs:
+            r.bold = True
+b4_rows = [
+    ("B4.1", "Air/bubble detector (ultrasonic) with automatic venous line clamp on air detection.", "[M]"),
+    ("B4.2", "Blood leak detector on the dialysate outflow with alarm.", "[M]"),
+    ("B4.3", "Arterial and venous pressure monitoring with adjustable alarm limits.", "[M]"),
+    ("B4.4", "Transmembrane pressure (TMP) monitoring.", "[M]"),
+    ("B4.5", "Conductivity and temperature safety monitoring with automatic dialysate bypass on fault.", "[M]"),
+    ("B4.6", "Automatic self-test of safety systems at start-up before patient connection.", "[M]"),
+    ("B4.7", "Audible and visual alarms with clear prioritisation; alarm history/event log retrievable.", "[M]"),
+    ("B4.8", "Integral heparin (anticoagulant) pump with bolus and continuous delivery.", "[M]"),
+    ("B4.9", "Internal backup battery to sustain monitoring and blood pump through short mains interruptions (bridging), independent of the external UPS.", "[M]"),
+    ("B4.10", "For online HDF: validated ultrafilter arrangement producing ultrapure dialysate/substitution fluid per ISO 23500; defined ultrafilter change interval.", "[M]"),
+]
+for row_data in b4_rows:
+    row = t4c.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4c, [1.5, 12.0, 1.5])
+
+body("B.5 Dialysate Water & Fluid Quality", bold=True)
+t4d = doc.add_table(rows=1, cols=3)
+t4d.style = "Light Grid Accent 1"
+hdr = t4d.rows[0].cells
+for i, txt in enumerate(["#", "Requirement", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
+        for r in p.runs:
+            r.bold = True
+b5_rows = [
+    ("B5.1", "Machine designed to operate on treated water meeting ISO 23500-3 (water for haemodialysis), latest edition.", "[M]"),
+    ("B5.2", "For online HDF, the machine shall produce dialysate and substitution fluid meeting ultrapure/sterile quality per ISO 23500-5 / manufacturer validation.", "[M]"),
+    ("B5.3", "Compatible with a central RO water supply and standard ring-main pressures/temperatures (bidder to state inlet water pressure, flow, and quality requirements).", "[M]"),
+    ("B5.4", "Automatic internal disinfection (heat and/or chemical, e.g. citric) with documented cycles; disinfectant compatibility stated.", "[M]"),
+]
+for row_data in b5_rows:
+    row = t4d.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4d, [1.5, 12.0, 1.5])
+
+body("B.6 Uninterruptible Power Supply (UPS) \u2014 Per Machine", bold=True)
+note("Each machine shall be supplied with its own dedicated UPS, sized to the machine's cyclic heater load, not just VA-rated generically.")
+t4e = doc.add_table(rows=1, cols=4)
+t4e.style = "Light Grid Accent 1"
+hdr = t4e.rows[0].cells
+for i, txt in enumerate(["#", "Parameter", "Minimum requirement", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
+        for r in p.runs:
+            r.bold = True
+b6_rows = [
+    ("B6.1", "Topology", "True online double-conversion (VFI class per IEC 62040-3), pure sine-wave output.", "[M]"),
+    ("B6.2", "Rating", "Bidder to size the UPS to the machine's peak (heater-cycling) load with adequate margin; state VA/W rating and basis.", "[M]"),
+    ("B6.3", "Backup runtime", "At least 20 minutes at the machine's rated operating load, sufficient for safe treatment termination and rinse-back (indicative minimum).", "[M]"),
+    ("B6.4", "Extended runtime", "30-60 minutes at rated load, or extendable battery capacity.", "[D]"),
+    ("B6.5", "Transfer / output", "Zero break to load (online), output voltage/frequency matched to local mains; input surge/overload protection.", "[M]"),
+    ("B6.6", "Safety/standards", "Compliant with IEC 62040-1 (safety) and IEC 62040-3 (performance), latest editions.", "[M]"),
+    ("B6.7", "Battery", "Sealed maintenance-free (VRLA) or Li-ion; stated design life and replacement interval; hot-swappable batteries.", "[D]"),
+    ("B6.8", "Monitoring", "Front-panel status, audible alarm on mains fail/low battery; comms port (e.g. USB/SNMP) for status.", "[D]"),
+    ("B6.9", "Protection & earthing", "Compatible with local earthing; suitable for continuous medical use; sized cabling and protection included.", "[M]"),
+]
+for row_data in b6_rows:
+    row = t4e.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4e, [1.3, 2.5, 9.2, 1.0])
+
+body("B.7 Quality Assurance Requirements", bold=True)
+qa_items = [
+    "[M] Manufacturer ISO 13485 certified; certificates valid at bid submission.",
+    "[M] Each delivered unit to carry a Certificate of Conformity / factory test (QC) certificate and unique serial number.",
+    "[M] Batch/lot traceability for the machine and for consumables supplied.",
+    "[M] Electrical safety and functional test at commissioning (e.g., per IEC 62353) with a written, signed report handed to NIKDU.",
+    "[D] Evidence of the model's field reliability (installed base, MTBF, reference sites).",
+]
+for item in qa_items:
+    doc.add_paragraph(item, style="List Bullet")
+
+body("B.8 Warranty & After-Sales Service", bold=True)
+t4f = doc.add_table(rows=1, cols=3)
+t4f.style = "Light Grid Accent 1"
+hdr = t4f.rows[0].cells
+for i, txt in enumerate(["#", "Requirement", "M/D"]):
+    hdr[i].text = txt
+    for p in hdr[i].paragraphs:
+        for r in p.runs:
+            r.bold = True
+b8_rows = [
+    ("B8.1", "Comprehensive warranty of at least 24 months (parts and labour) from date of commissioning/acceptance. State exactly what is included/excluded.", "[M]"),
+    ("B8.2", "Guaranteed availability of spare parts and consumables for at least 10 years after supply, in writing from the manufacturer.", "[M]"),
+    ("B8.3", "Locally registered/authorised service agent with trained biomedical engineers; state office location and staffing.", "[M]"),
+    ("B8.4", "Defined response and resolution times (e.g., response within 24-48 h; on-site as required). State turnaround for major repairs.", "[M]"),
+    ("B8.5", "Preventive maintenance schedule during warranty at no extra cost; calibration and safety testing included.", "[M]"),
+    ("B8.6", "Optional priced Annual/Comprehensive Maintenance Contract (AMC/CMC) for post-warranty years, quoted separately.", "[D]"),
+    ("B8.7", "Loan/standby unit or guaranteed uptime commitment during extended repairs.", "[D]"),
+    ("B8.8", "Indicative per-treatment consumable price list (dialyzer, tubing, concentrate, HDF set) to reveal running cost and lock-in.", "[M]"),
+]
+for row_data in b8_rows:
+    row = t4f.add_row().cells
+    for i, val in enumerate(row_data):
+        row[i].text = val
+set_col_widths(t4f, [1.5, 12.0, 1.5])
+
+body("B.9 Installation & Commissioning", bold=True)
+inst_items = [
+    "[M] Supplier responsible for delivery, unpacking, installation, connection to water/drain/power, testing, and commissioning at NIKDU.",
+    "[M] Site-preparation requirements (water quality/pressure, drain, electrical, space, environment) provided in advance in writing.",
+    "[M] Factory/installation acceptance test protocol executed with NIKDU staff; formal acceptance sign-off on successful completion.",
+    "[M] Interface with the existing RO/water-treatment plant verified; any incompatibility reported before installation.",
+    "[D] Supplier support for integrating machines with any dialysis data-management/reporting system.",
+]
+for item in inst_items:
+    doc.add_paragraph(item, style="List Bullet")
+
+body("B.10 Training Requirements", bold=True)
+train_items = [
+    "[M] On-site clinical (user) training on the exact model supplied, for nurses/technicians across shifts, after installation.",
+    "[M] On-site technical/biomedical training on disinfection, routine maintenance, calibration, and troubleshooting.",
+    "[M] Training materials (printed and/or electronic) and quick-reference alarm-response guides provided.",
+    "[D] Refresher/second-cohort training session and train-the-trainer option.",
+    "[D] Certificates of completion for trained staff.",
+]
+for item in train_items:
+    doc.add_paragraph(item, style="List Bullet")
+
+body("B.11 Documentation Requirements (with each machine)", bold=True)
+doc_items = [
+    "[M] Operator/user manual and service/technical manual in English (hard copy and electronic).",
+    "[M] Installation manual and site-preparation guide.",
+    "[M] Certificates: US-FDA/EU-CE/TUV/JIS as applicable, ISO 13485, IEC 60601-1 / -2-16 / -1-2 test evidence, Certificate of Conformity, warranty certificate.",
+    "[M] Preventive-maintenance schedule and recommended spare-parts list with part numbers.",
+    "[M] Consumables list with part numbers and compatibility.",
+    "[D] Electrical safety / commissioning test report template and calibration records.",
+]
+for item in doc_items:
+    doc.add_paragraph(item, style="List Bullet")
+
+note(
+    "Standards referenced above (IEC 60601-1, IEC 60601-2-16, IEC 60601-1-2, ISO 23500 series, "
+    "ISO 13485, IEC 62353, IEC 62040-1/-3) should be cited as \u2018latest published edition\u2019 in the "
+    "final tender and verified against current editions at time of publication, per the source "
+    "document's own guidance."
+)
 
 # ================= SECTION 5: QUALIFICATION CRITERIA =================
 doc.add_page_break()
@@ -392,34 +582,26 @@ std_elig = [
 for item in std_elig:
     doc.add_paragraph(item, style="List Bullet")
 
-h2("Suggested Technical & Financial Qualification Criteria (Benchmarked Against a Real Comparable Tender)")
+h2("Technical & Financial Qualification Criteria (Grounded in the Actual e-PG4 STD)")
 note(
-    "SOURCING NOTE: The e-GP KB (PPR 2025 / e-GP Guidelines) sets the declaration and process "
-    "requirements above but does not specify numeric qualification thresholds for Goods \u2014 "
-    "those are package-specific, set by the PE/TEC in the TDS. The World Bank Standard "
-    "Procurement Document (Request for Bids \u2014 Goods, One-Envelope, Oct 2017) confirms this is "
-    "normal: even that template leaves turnover/experience figures as blank fields for the "
-    "borrower to fill in \u2014 there is no universal fixed multiplier. To ground this in real "
-    "practice, the structure below is benchmarked against an ACTUAL comparable Bangladeshi "
-    "government medical-equipment tender: NICVD (National Institute of Cardiovascular Diseases, "
-    "Dhaka) Medical Equipment Tender Schedule, FY2024-2025 (public document, nicvd.gov.bd). "
-    "Caveat: that NICVD tender cites Rule 127 of the Public Procurement Rules, 2008 \u2014 it "
-    "predates PPR 2025, so it is a real structural precedent from a comparable specialized "
-    "government hospital, not a PPR-2025-verified figure. IMPORTANT LIMIT: NICVD's tender "
-    "notice does not disclose its own OCE, so no real similar-experience-to-OCE ratio could be "
-    "computed from it \u2014 the specific-experience BDT figure below is an illustrative percentage "
-    "of NIKDU's OCE (general international procurement norms), not a checked benchmark ratio. "
-    "Numeric thresholds (BDT amounts, contract counts) below still require NIKDU/TEC's formal "
-    "decision \u2014 setting them too high can unlawfully restrict competition, too low can let "
-    "unqualified suppliers through."
+    "SOURCING NOTE: The actual e-PG4, ICT.pdf STD (Section 2, Tender Data Sheet \u2014 Qualification "
+    "Criteria, ITT Clauses 13-15) is now the primary source for the structure and ranges below, "
+    "superseding the earlier NICVD-benchmarked figures where the two differ. Numeric choices "
+    "within the STD's guided ranges \u2014 and the exact BDT/contract-count/year figures \u2014 still "
+    "require NIKDU/TEC's formal decision in the TDS: setting them too high can unlawfully "
+    "restrict competition, too low can let unqualified suppliers through. Where the STD is "
+    "silent (e.g., the NICVD-style bilateral-agreement requirement), the earlier real-precedent "
+    "benchmark is kept as a supplementary reference."
 )
 qual_items = [
-    "General experience: minimum 3 (three) years as a registered Supplier of Goods and related services (matches NICVD FY2024-25 precedent, ITT 14.1(a)).",
-    "Specific experience: satisfactory completion of supply of similar goods (hemodialysis machines or comparable dialysis/critical-care medical equipment) reaching a minimum aggregate value of approx. BDT 107 crore (illustrative: 40% of the BDT 267.5 crore OCE) achievable through a maximum of 4 (four) contracts, completed within the last 5 (five) years counting backward from the date of IFT publication (structure matches NICVD FY2024-25 precedent, ITT 14.1(b); the 40% figure is NOT derived from NICVD's own ratio \u2014 its tender notice does not disclose an OCE to check against, so no verified ratio could be computed. 40% reflects general international procurement norms, not a checked benchmark. NIKDU/TEC must set the final figure.)",
-    "Financial capacity: minimum liquid assets / working capital / credit line(s) from a scheduled Bank of Bangladesh, net of other contractual commitments, of approx. BDT 120-128 crore (1.1-1.2x the specific-experience threshold above, ratio observed in the NICVD FY2024-25 precedent, ITT 15.1(a)) \u2014 not an annual-turnover multiplier. Since the specific-experience base figure itself is illustrative (see above), this derived figure is illustrative too.",
-    "Manufacturer's Authorization Form confirming the Tenderer is authorized to supply the offered hemodialysis machines (if the Tenderer is not the manufacturer, a bilateral agreement between manufacturer and bidder is also required \u2014 NICVD FY2024-25 precedent, ITT 21.1(l)).",
-    "Regulatory clearance for the offered equipment (DGDA import & medical device clearance for Bangladesh, plus CE/FDA or equivalent from the country of manufacture, per the NICVD precedent's product-certificate requirement).",
-    "Demonstrated after-sales service and spare-parts support capability within Bangladesh (own office or authorized local service partner).",
+    "General experience (ITT 13.1(a)): minimum 3 (three) years as a Supplier in the supply of Goods, years counting backward from the date of IFT publication \u2014 the STD's own example (\u201ca minimum of three (3) or five (5) years would be deemed reasonable\u201d) [e-PG4, ICT.pdf, ITT 13.1(a)].",
+    "Specific experience (ITT 13.1(b)): satisfactory completion of supply of Goods similar to hemodialysis machines, with a minimum aggregate value set between BDT 160.5 crore and BDT 214 crore (the STD's own guided range: 60-80% of the BDT 267.5 crore OCE), completed within the last 5-10+ years (the STD notes that for large supply, a single contract of similar nature over a wider timeframe may be more appropriate than aggregating several smaller ones) [e-PG4, ICT.pdf, ITT 13.1(b)]. This REPLACES the earlier illustrative 40%-of-OCE / up-to-4-contracts structure borrowed from the NICVD precedent, now that the actual applicable STD's guidance is available.",
+    "Minimum supply/production capacity (ITT 13.1(c)): indicative minimum annual capacity of 2,060-5,150 units (2-5x the 1,030-unit proposed supply, per the STD's own guidance for common Goods) [e-PG4, ICT.pdf, ITT 13.1(c)]. This is a requirement NIKDU's TDS did not previously include.",
+    "Financial capacity (ITT 14.1(b)): minimum liquid assets / working capital / credit line(s) (or any combination), net of other contractual commitments, set between BDT 214 crore and BDT 267.5 crore (80-100% of the OCE, per the STD's own guidance) [e-PG4, ICT.pdf, ITT 14.1(b)].",
+    "Litigation history (ITT 14.1(a)): satisfactory resolution of all claims under litigation; all pending litigation treated as resolved against the Tenderer for evaluation purposes [e-PG4, ICT.pdf, ITT 14.1(a)].",
+    "Manufacturer's Authorization Form (ITT 27.1(g)): required for all items, since hemodialysis machines are specialized medical devices, not off-the-shelf goods [e-PG4, ICT.pdf, ITT 27.1(g)] (if the Tenderer is not the manufacturer, a bilateral agreement between manufacturer and bidder is also good practice \u2014 per the NICVD FY2024-25 precedent, ITT 21.1(l)).",
+    "Regulatory clearance for the offered equipment: US-FDA / EU-CE / TUV / JIS (per Technical Specification B2.2) plus DGDA import & medical device clearance for Bangladesh.",
+    "Demonstrated after-sales service and spare-parts support capability within Bangladesh (own office or authorized local service partner), consistent with Technical Specification B8.3.",
     "No history of debarment under PPR 2025.",
 ]
 for item in qual_items:
@@ -445,7 +627,7 @@ pcc_rows = [
     ("Delivery & Completion", "Delivery to be completed within 180 days of contract signing, in three phases (300 / 400 / 330 units) to hospitals listed in Appendix A (Section 3)"),
     ("Installation & Commissioning", "Supplier responsible for installation, commissioning, and staff training at each delivery site prior to acceptance"),
     ("Inspection & Acceptance", "Inspected and acceptance-tested by NIKDU's Inspection Committee (with biomedical engineering representation) at each delivery site upon installation and commissioning. A Provisional Acceptance Certificate is issued on successful functional testing of each unit; a Final Acceptance Certificate is issued after the warranty-observation period."),
-    ("Warranty Period", "Minimum 2 years comprehensive warranty from the date of Final Acceptance at each site \u2014 subject to the Technical Specification Committee's approved figure"),
+    ("Warranty Period", "Comprehensive warranty of at least 24 months (parts and labour) from the date of commissioning/acceptance at each site, per Technical Specification B8.1 (confirmed by Technical Specification Committee)"),
     ("Payment Terms", "10% advance payment on contract signing (against Advance Payment Guarantee); 80% on delivery, installation and commissioning per phase; 10% retained until Final Acceptance / end of warranty-observation period. Payment due within 30 days of the relevant Acceptance Certificate."),
     ("Liquidated Damages", "0.5% of the value of the delayed/undelivered portion of the Goods per week (or part thereof) of delay beyond the Schedule of Requirements deadline, up to a maximum of 10% of the Contract Price"),
     ("Country of Origin / Manufacturer", "No restriction on country of manufacture, provided it is not an excluded country under the Eligible Countries clause (Section 2) \u2014 currently: all countries except Israel"),
@@ -458,14 +640,15 @@ for a, b_ in pcc_rows:
 set_col_widths(t6, [6.0, 10.0])
 
 note(
-    "AI-SUGGESTED DEFAULTS \u2014 NOT SOURCED FROM THE e-GP KNOWLEDGE BASE. The KB confirms PPR "
-    "2025 requires inspection/acceptance before payment and Performance/Notification-of-Award "
+    "AI-SUGGESTED DEFAULTS \u2014 NOT SOURCED FROM THE e-GP KNOWLEDGE BASE, EXCEPT WARRANTY PERIOD "
+    "(now confirmed by the Technical Specification Committee, B8.1). The KB confirms PPR 2025 "
+    "requires inspection/acceptance before payment and Performance/Notification-of-Award "
     "timelines tied to Schedule II [PPR2025.pdf | page 207; eGP_Guidelines.pdf | page 26], but "
-    "does not specify a numeric Liquidated Damages formula, payment milestone split, or "
-    "acceptance protocol for Goods \u2014 those are package-specific PE/TEC decisions. The figures "
-    "above (0.5%/week up to 10% cap; 10/80/10 payment split; 30-day payment window) reflect "
-    "common PPR/international practice, not a verified legal requirement \u2014 confirm against "
-    "NIKDU's standard contract terms before publication."
+    "does not specify a numeric Liquidated Damages formula or payment milestone split for Goods "
+    "\u2014 those are package-specific PE/TEC decisions. The remaining figures above (0.5%/week up "
+    "to 10% cap; 10/80/10 payment split; 30-day payment window) reflect common PPR/international "
+    "practice, not a verified legal requirement \u2014 confirm against NIKDU's standard contract "
+    "terms before publication."
 )
 
 # ================= SECTION 7: ENVELOPE CONTENTS =================
@@ -474,37 +657,49 @@ h1("Section 7 — Envelope Contents (Single Envelope)")
 body(
     "This tender follows the One-Stage One-Envelope method [per NIKDU instruction, e-PG4 "
     "[OTM(ICT)]] — technical and financial documents are submitted together in a single "
-    "envelope, not split across separate technical and financial envelopes. The Tenderer's "
-    "single envelope/submission is expected to contain:"
+    "envelope, not split across separate technical and financial envelopes. Per ITT Clause "
+    "20.1 of the actual e-PG4, ICT.pdf Standard Tender Document, the Tenderer's single "
+    "envelope/submission comprises:"
+)
+
+note(
+    "SOURCE CORRECTION: the list below replaces the earlier PG3-series-based proxy list with "
+    "the REAL e-PG4 envelope contents and form numbers, taken directly from ITT Clause 20.1 of "
+    "e-PG4, ICT.pdf (the actual Standard Tender Document for this package). This resolves the "
+    "form-series gap flagged earlier, when only PG3-series text was available."
 )
 
 env_items = [
-    "Tender Submission Form (Goods) — signed on the Tenderer's letterhead, stating the Tender Price (content basis: PG3-series text [PPR2025.pdf | page 242] — actual submission uses the e-PG4 equivalent form)",
-    "Price Schedule(s) — Price and Delivery Schedule for Goods (Manufactured in Bangladesh / to be Imported / already Imported, as applicable) [egp_new_features.md | page 164]",
-    "Discount Form, if the Tenderer offers an unconditional discount (content basis: PG3-series text [PPR2025.pdf | page 247])",
-    "Tender Security — Pay Order / Bank Draft / Bank Guarantee per the TDS amount and validity [PPR2025.pdf | page 243]",
-    "Manufacturer's Authorization Form (plus a bilateral agreement between manufacturer and bidder, if the Tenderer is not the manufacturer — per the NICVD FY2024-25 comparable-tender precedent)",
-    "Eligibility declarations and supporting documents: nationality from an eligible country, sole-Tenderer status, no association with the document preparer, no insolvency/debarment record, litigation history, tax and beneficial-ownership declarations (content basis: PG3-series text [PPR2025.pdf | page 244, 249])",
-    "Technical Specification compliance/deviation statement, against Section 4",
-    "Qualification/experience documents supporting Section 5 (general and specific supply experience, liquid-asset/working-capital evidence, regulatory clearances)",
-    "Original product catalogue/brochure and operational/service manual (per the NICVD FY2024-25 comparable-tender precedent)",
-    "Manufacturer/Supplier Warranty Certificate (per the NICVD FY2024-25 comparable-tender precedent)",
-    "Power of Attorney / authorization of the signatory",
-    "Acknowledgment of any Addenda issued to the Tender Document, if applicable",
+    "Tender Submission Letter (Form e-PG4-1) — per ITT Sub-Clause 21.1, completed without alteration to its e-GP System format [ITT 20.1(a), 21.1]",
+    "Tenderer Information (Form e-PG4-2), per ITT Clauses 5, 25 and 27 [ITT 20.1(b)]",
+    "Subcontractor Information (Form e-PG4-3), if subcontracting any portion of the Goods (up to the 30% cap) [ITT 15.1]",
+    "Priced Schedule for each lot (Form e-PG4-4A / 4B / 4C / 4D — covering Goods manufactured in Bangladesh, to be imported, already imported, and Related Services respectively), per ITT Clauses 21, 23 and 24 [ITT 20.1(c)]",
+    "Tender Security (Bank Draft, Pay Order, or Bank Guarantee per Form e-PG4-7), per ITT Clauses 30, 31 and 32 [ITT 20.1(d)]",
+    "Specifications Submission and Compliance Sheet (Form e-PG4-5), per ITT Clause 26.2 — the Tenderer's item-by-item compliance statement against Section 4 [ITT 20.1(e)]",
+    "Manufacturer's Authorization Letter (Form e-PG4-6), per the TDS decision at ITT 27.1(g) — required for all items on this package [ITT 20.1(i)]",
+    "Valid Trade License [ITT 20.1(g)]",
+    "Proof of tax obligations: TIN certificate; acknowledgement slip of income tax return submission for the relevant Assessment Year (as stated in the TDS); VAT registration certificate / Business Identification Number (BIN) [ITT 20.1(h)]",
+    "Documentary evidence establishing eligibility, and conformity of the Goods, and the Tenderer's minimum qualifications per ITT Clauses 25, 26 and 27 (i.e., the Section 5 qualification/experience evidence and the Section 4 certificates: US-FDA/EU-CE/TUV/JIS, ISO 13485, IEC 60601-1/-2-16/-1-2 test evidence, free-sale certificate) [ITT 20.1(i)]",
+    "Document establishing legal and financial autonomy and compliance with commercial law, if the Tenderer is a Government-owned entity [ITT 20.1(j)]",
+    "Affidavit confirming legal capacity — no existing court orders preventing the Tenderer or its employees from entering into or signing a Contract [ITT 20.1(k)]",
+    "Affidavit confirming the Tenderer is not insolvent, in receivership, bankrupt, or subject to related legal proceedings [ITT 20.1(l)]",
+    "Documentary evidence of enrollment in the relevant professional/trade organization in Bangladesh (or country of origin for foreign Tenderers), or a competency certificate from a professional institution [ITT 20.1(m)]",
+    "Country of origin declarations for the Goods and Related Services, in the Price Schedule forms (Form e-PG4-4A/4B/4C/4D) [ITT 20.1(n)]",
+    "Any other document specified in the TDS [ITT 20.1(o)]",
 ]
 for item in env_items:
     doc.add_paragraph(item, style="List Bullet")
 
 note(
-    "FORM-SERIES CAVEAT: This is a document-content checklist, not a form-number checklist. "
-    "Joint Venture participation is not applicable here — the e-PG4 [OTM(ICT)] STD does not "
-    "permit JV Tenderers [egp_new_features.md | page 163], so no JV-specific forms are listed. "
-    "Several items above are substantively based on PG3-series form text (the only Goods "
-    "declaration/security/discount text retrievable from the KB) because it is a National "
-    "Competitive Tendering STD, NOT the e-PG4 International Competitive Tendering STD this "
-    "package requires. Do NOT use PG3-numbered forms for this international tender — NIKDU "
-    "must pull the actual e-PG4 form set and form numbers from the e-GP portal when the "
-    "package is created there; this list only confirms what content those forms should carry."
+    "NOT REQUIRED / NOT APPLICABLE under the actual e-PG4 STD: a separate Discount Form is not "
+    "listed in ITT 20.1 (discounts are handled within the Price Schedule forms per ITT 23); "
+    "Alternative Tenders are explicitly disallowed in the e-GP System [ITT 22.1]; Joint Venture "
+    "participation has no provision anywhere in this STD, confirming the earlier KB finding "
+    "[egp_new_features.md | page 163]. A generic product catalogue/brochure, operational manual, "
+    "and warranty certificate are good-practice additions from the NICVD FY2024-25 comparable "
+    "precedent, not an explicit e-PG4 requirement — worth including as supporting evidence for "
+    "the Specifications Submission and Compliance Sheet (Form e-PG4-5) even though not separately "
+    "itemized in ITT 20.1."
 )
 
 # ================= SOURCES =================
@@ -515,11 +710,13 @@ body(
     "cover World Bank/ADB donor-funded procurement rules):"
 )
 sources = [
+    "e-PG4, ICT.pdf \u2014 the actual Standard Tender Document for Procurement of Goods, International Competitive Tendering (from NIKDU's Resources/STDs folder). PRIMARY SOURCE for Sections 2, 5, and 7: real ITT clause numbers (5, 6, 13-15, 20, 21, 27-34, 48, 60, 63-68), real e-PG4-1 through e-PG4-12 form numbers, and the STD's own TDS guidance ranges (tender validity, tender/performance security, financial and experience qualification thresholds, subcontracting cap, quantity variation cap).",
     "PPR2025.pdf (Public Procurement Rules 2025) \u2014 pages 195, 198, 207, 242, 243, 244, 247, 249, 261, 262",
     "eGP_Guidelines.pdf (e-GP Guidelines 2025 gazette, 12 Mar 2025) \u2014 pages 7, 19-20, 21, 26, 39, 41, 45, 48, 50, 51, 52 (0-indexed; add 1 for the printed page number)",
     "egp_new_features.md \u2014 e-GP module release notes, PPR 2025 rollout entries (SLT calculation, Domestic Preference, JV restrictions, tender security automation)",
     "EXTERNAL (not in the e-GP KB): World Bank Standard Procurement Document \u2014 Request for Bids, Goods (One-Envelope Bidding Process), October 2017 \u2014 Section III, Evaluation and Qualification Criteria (confirms no fixed turnover/experience multiplier; left as a blank template field)",
     "EXTERNAL (not in the e-GP KB): NICVD (National Institute of Cardiovascular Diseases, Dhaka) Medical Equipment Tender Schedule, FY2024-2025, published at nicvd.gov.bd \u2014 real comparable Bangladeshi government medical-equipment tender, cites PPR 2008 (predates PPR 2025); Tender Security clause ITT 31.1 (\"3% of quoted value\") used as a cross-check against NIKDU's TDS Tender Security base",
+    "NIKDU_Hemodialysis_HDF_Machine_with_UPS_Technical_Spec_v1.docx \u2014 NIKDU Technical Specification Committee's approved technical specification, dated 24 July 2026, Version Draft 1.0. Source for all of Section 4.",
 ]
 for s in sources:
     doc.add_paragraph(s, style="List Bullet")
