@@ -20,7 +20,6 @@ outputs/tender_metadata/*.json
 outputs/compliance_checklist/*.json
 outputs/oem_checklist/*.json
 outputs/envelope_contents/*.json
-outputs/tender_drafts/*.docx
 outputs/*.docx
 
 # Documents (sensitive tender files — do not commit)
